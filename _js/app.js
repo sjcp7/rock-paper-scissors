@@ -1,5 +1,14 @@
+const winMessage = "Congrats, you won!";
+const drawMessage = "Hm, it's a tie.";
+const loseMessage = "Oh no, you lost! Try harder.";
+
 function getRandomNumber() {
     return Math.floor(Math.random() * 3)
+}
+
+function getPlayerSelection() {
+    let playerSelection = prompt('Rock, Paper, or Scissors?');
+    return playerSelection;
 }
 
 function computerPlay() {
@@ -25,47 +34,92 @@ function playRound(playerSelection, computerSelection) {
     if (computerSelection === "rock") {
 
         if(playerSelection === "rock") { 
-            return "Hm, it's a tie.";
+            return drawMessage;
         }
 
         else if(playerSelection === 'paper') {
-            return "Congrats, you won!";
+            return winMessage;
         }
 
         else {
-            return "Oh no, you lost! Try harder.";
+            return loseMessage;
         }
     }
 
     else if(computerSelection === "paper") {
 
         if(playerSelection === "rock") {
-            return "Oh no, you lost! Try harder.";
+            return loseMessage;
         }
 
         else if(playerSelection === "paper") {
-            return "Hm, it's a tie.";
+            return drawMessage;
         }
 
         else {
-            return "Congrats, you won!";
+            return winMessage;
         }
     }
 
     else {
 
         if(playerSelection === "rock") {
-            return "Congrats, you won!";
+            return winMessage;
         }
 
         else if(playerSelection === "paper") {
-            return "Oh no, you lost! Try harder.";
+            return loseMessage;
         }
 
         else {
-            return "Hm, it's a tie.";
+            return drawMessage;
         }
     }
     
 }
 
+function game(rounds = 5) {
+    let playerScore = 0;
+    let computerScore = 0;
+    let draws = 0;
+
+    for(let i = 1; i <= rounds; i++) {
+        let playerSelection = getPlayerSelection();
+        let computerSelection = computerPlay();
+        let result = playRound(playerSelection, computerSelection);            
+
+        if(result === winMessage) {
+            playerScore++;
+            alert(`${winMessage} ${playerSelection} beats ${computerSelection}!`);         
+        }
+
+        else if(result === loseMessage) {
+            computerScore++;
+            alert(`${loseMessage} ${computerSelection} beats ${playerSelection}!`);
+        }
+
+        else {
+            draws++;
+            alert("It's a draw.");
+        }
+    }
+
+    let scoreMessage = `Player score = ${playerScore} | Computer score = ${computerScore} | Draws = ${draws}`;
+
+    if(playerScore > computerScore) {
+        alert(`You won this match!`);
+        alert(scoreMessage);
+    }
+
+    else if(computerScore > playerScore) {
+        alert(`Too bad, you lost to the machine!`);
+        alert(scoreMessage);
+    }
+
+    else {
+        alert(`This match ends up tied!`);
+        alert(scoreMessage);
+    }
+}
+
+game();
