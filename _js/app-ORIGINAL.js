@@ -121,3 +121,5 @@ function game(rounds = 5) {
         alert(scoreMessage);
     }
 }
+
+game();

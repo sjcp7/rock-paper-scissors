@@ -3,9 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/3922aa8edb.js" crossorigin="anonymous"></script>
     <title>Rock, Paper, Scissors</title>
 </head>
 <body>
+    <div id="container">
+        <header>
+            <h1>Rock, Paper and Scissors Game</h1>
+        </header>        
+        
+        <main>
+            <div id="player-options">
+                <div id="rock" class="options">
+                    <span class="fas fa-hand-rock"></span>
+                    <h4>Rock</h4>
+                </div>
+        
+                <div id="paper" class="options">
+                    <span class="fas fa-hand-paper"></span>
+                    <h4>Paper</h4>
+                </div>
+        
+                <div id="scissors" class="options">
+                    <span class="fas fa-hand-scissors"></span>
+                    <h4>Scissors</h4>
+                </div>
+            </div>
+
+            <div id="arena">
+                <div id="arena-player"class="arena-element">
+                    <span class="fas fa-hand-scissors"></span>
+                    <h4>Player</h4>
+                </div>
+
+                <div id="arena-indicator" class="arena-element">
+                    <span class="fas fa-greater-than"></span>
+                    <span class="fas fa-less-than"></span>
+                    <span class="fas fa-equals"></span>
+                </div>
+                <div id="arena-cpu" class="arena-element">
+                    <span class="fas fa-hand-scissors"></span>
+                    <h4>CPU</h4>
+                </div>
+            </div>
+    
+            <div id="scoreboard">
+                <h2>Scoreboard</h2>
+                <div id="player-victories">
+                    <h3>Player score:</h3>
+                    <h3 class="points"></h3>
+                </div>
+    
+                <div id="player-losses">
+                    <h3>CPU score:</h3>
+                    <h3 class="points"></h3>
+                </div>
+    
+                <div id="draws">
+                    <h3>Draws:</h3>
+                    <h3 class="points"></h3>
+                </div>
+            </div>
+                        
+        </main>
+        
+
+    </div>
+
     <script src="_js/app.js"></script>
 </body>
 </html>
