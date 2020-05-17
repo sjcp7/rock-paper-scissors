@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/3922aa8edb.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="_css/style.css">
     <title>Rock, Paper, Scissors</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
         </header>        
         
         <main>
-            <div id="player-options">
+            <div id="player-options" class="main-sections">
                 <div id="rock" class="options">
                     <span class="fas fa-hand-rock"></span>
                     <h4>Rock</h4>
@@ -30,15 +31,15 @@
                 </div>
             </div>
 
-            <div id="arena">
-                <div id="arena-player"class="arena-element">
+            <div id="arena" class="main-sections">
+                <div id="arena-player" class="arena-element">
                     <span class="fas fa-hand-scissors"></span>
                     <h4>Player</h4>
                 </div>
 
                 <div id="arena-indicator" class="arena-element">
-                    <span class="fas fa-greater-than"></span>
-                    <span class="fas fa-less-than"></span>
+                    <!-- <span class="fas fa-greater-than"></span>
+                    <span class="fas fa-less-than"></span> -->
                     <span class="fas fa-equals"></span>
                 </div>
                 <div id="arena-cpu" class="arena-element">
@@ -47,21 +48,20 @@
                 </div>
             </div>
     
-            <div id="scoreboard">
-                <h2>Scoreboard</h2>
+            <div id="scoreboard" class="main-sections">
                 <div id="player-victories">
-                    <h3>Player score:</h3>
-                    <h3 class="points"></h3>
+                    <h3>Wins:</h3>
+                    <h3 class="points">0</h3>
                 </div>
     
                 <div id="player-losses">
-                    <h3>CPU score:</h3>
-                    <h3 class="points"></h3>
+                    <h3>Losses:</h3>
+                    <h3 class="points">0</h3>
                 </div>
     
                 <div id="draws">
                     <h3>Draws:</h3>
-                    <h3 class="points"></h3>
+                    <h3 class="points">0</h3>
                 </div>
             </div>
                         
