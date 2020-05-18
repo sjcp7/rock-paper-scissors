@@ -1,14 +1,24 @@
-const winMessage = "Congrats, you won!";
-const drawMessage = "Hm, it's a tie.";
-const loseMessage = "Oh no, you lost! Try harder.";
+const options = document.querySelectorAll('div[class="options"]');
+options.forEach(option => option.addEventListener("click", playRound));
+options.forEach(option => option.addEventListener("transitionend", removeTransition));
+
+let victories = 0;
+let losses = 0;
+let draws = 0;
 
 function getRandomNumber() {
     return Math.floor(Math.random() * 3)
 }
 
-function getPlayerSelection() {
-    let playerSelection = prompt('Rock, Paper, or Scissors?');
-    return playerSelection;
+function getPlayerSelection(e) {
+    const playerSelection = document.querySelector(`div[id="${e.toElement.id}"]`);
+    playerSelection.classList.add('clicked');
+    return playerSelection.id;
+}
+
+function removeTransition(e) {
+    if(e.propertyName !== 'transform') return;
+    this.classList.remove('clicked');
 }
 
 function computerPlay() {
@@ -27,97 +37,86 @@ function computerPlay() {
     }
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(e) {
+    const arenaPlayerSelectionEl = document.querySelector("#arena-player > span");
+    const arenaIndicatorEl = document.querySelector("#arena-indicator > span");
+    const arenaCpuSelectionEl = document.querySelector("#arena-cpu > span");
 
-    playerSelection = playerSelection.trim().toLowerCase();
+    const victoriesEl = document.querySelector("#player-victories > h3.points");
+    const lossesEl = document.querySelector("#player-losses > h3.points");
+    const drawsEl = document.querySelector("#draws > h3.points");
 
-    if (computerSelection === "rock") {
+    playerSelection = getPlayerSelection(e);
+    cpuSelection = computerPlay();
+
+    arenaCpuSelectionEl.className = `fas fa-hand-${cpuSelection}`;
+    arenaPlayerSelectionEl.className = `fas fa-hand-${playerSelection}`;
+
+    if (cpuSelection === "rock") {        
 
         if(playerSelection === "rock") { 
-            return drawMessage;
+            draws++;
+            arenaIndicatorEl.className = 'fas fa-equals';
         }
 
         else if(playerSelection === 'paper') {
-            return winMessage;
+            victories++;
+            arenaIndicatorEl.className = 'fas fa-greater-than';
         }
 
         else {
-            return loseMessage;
+            losses++;
+            arenaIndicatorEl.className = 'fas fa-less-than';
         }
     }
 
-    else if(computerSelection === "paper") {
+    else if(cpuSelection === "paper") {
 
         if(playerSelection === "rock") {
-            return loseMessage;
+            losses++;
+            arenaIndicatorEl.className = 'fas fa-less-than';
         }
 
         else if(playerSelection === "paper") {
-            return drawMessage;
+            draws++;
+            arenaIndicatorEl.className = 'fas fa-equals';
         }
 
         else {
-            return winMessage;
+            victories++;
+            arenaIndicatorEl.className = 'fas fa-greater-than';
         }
     }
 
     else {
 
         if(playerSelection === "rock") {
-            return winMessage;
+            victories++;
+            arenaIndicatorEl.className = 'fas fa-greater-than';
         }
 
         else if(playerSelection === "paper") {
-            return loseMessage;
-        }
-
-        else {
-            return drawMessage;
-        }
-    }
-    
-}
-
-function game(rounds = 5) {
-    let playerScore = 0;
-    let computerScore = 0;
-    let draws = 0;
-
-    for(let i = 1; i <= rounds; i++) {
-        let playerSelection = getPlayerSelection();
-        let computerSelection = computerPlay();
-        let result = playRound(playerSelection, computerSelection);            
-
-        if(result === winMessage) {
-            playerScore++;
-            alert(`${winMessage} ${playerSelection} beats ${computerSelection}!`);         
-        }
-
-        else if(result === loseMessage) {
-            computerScore++;
-            alert(`${loseMessage} ${computerSelection} beats ${playerSelection}!`);
+            losses++;
+            arenaIndicatorEl.className = 'fas fa-less-than';
         }
 
         else {
             draws++;
-            alert("It's a draw.");
+            arenaIndicatorEl.className = 'fas fa-equals';
         }
     }
 
-    let scoreMessage = `Player score = ${playerScore} | Computer score = ${computerScore} | Draws = ${draws}`;
+    victoriesEl.innerHTML = victories;
+    lossesEl.innerHTML = losses;
+    drawsEl.innerHTML = draws;
+    console.log(`Victories=${victories}, defeats=${losses}, draws=${draws}`);
 
-    if(playerScore > computerScore) {
-        alert(`You won this match!`);
-        alert(scoreMessage);
+    if(victories == 5) {
+        alert('You won! To play again, reload the page');
     }
-
-    else if(computerScore > playerScore) {
-        alert(`Too bad, you lost to the machine!`);
-        alert(scoreMessage);
-    }
-
-    else {
-        alert(`This match ends up tied!`);
-        alert(scoreMessage);
-    }
+    else if(losses == 5) {
+        alert('You lost! To play again, reload the page');
+    } 
+    
 }
+
